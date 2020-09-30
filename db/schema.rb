@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_29_194927) do
+ActiveRecord::Schema.define(version: 2020_09_30_122412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campaigns", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "vaccine_type_id", null: false
+    t.text "public"
+    t.text "region"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["vaccine_type_id"], name: "index_campaigns_on_vaccine_type_id"
+  end
+
+  create_table "doses", force: :cascade do |t|
+    t.date "date"
+    t.bigint "user_id"
+    t.bigint "vaccine_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_doses_on_user_id"
+    t.index ["vaccine_id"], name: "index_doses_on_vaccine_id"
+  end
+
+  create_table "suggested_doses", force: :cascade do |t|
+    t.integer "month_age"
+    t.text "description"
+    t.bigint "vaccine_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["vaccine_type_id"], name: "index_suggested_doses_on_vaccine_type_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,6 +53,13 @@ ActiveRecord::Schema.define(version: 2020_09_29_194927) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "cpf"
+    t.date "birth_date"
+    t.string "address"
+    t.boolean "authenticated"
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -46,6 +83,10 @@ ActiveRecord::Schema.define(version: 2020_09_29_194927) do
     t.index ["vaccine_type_id"], name: "index_vaccines_on_vaccine_type_id"
   end
 
+  add_foreign_key "campaigns", "vaccine_types"
+  add_foreign_key "doses", "users"
+  add_foreign_key "doses", "vaccines"
+  add_foreign_key "suggested_doses", "vaccine_types"
   add_foreign_key "vaccines", "users"
   add_foreign_key "vaccines", "vaccine_types"
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :vaccines, only [:index,:show]
+  # resources :vaccines, only [:index, :show]
   resources :vaccine_types
   devise_for :users
   root to: 'pages#home'
