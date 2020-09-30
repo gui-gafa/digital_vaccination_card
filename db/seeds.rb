@@ -6,15 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-def random_cpf
-  numbers = (0..9).to_a
-  cpf = ''
-  10.times do |_|
-    cpf += numbers.sample.to_s
-  end
-  cpf
-end
-
 
 ['guilherme', 'lourdes', 'maique', 'marcio'].each do |name|
   User.create(
@@ -22,7 +13,7 @@ end
     password: '123456',
     first_name: name.capitalize,
     last_name: Faker::Name.last_name,
-    cpf: random_cpf,
+    cpf: CPF.generate,
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     address: Faker::Address.street_name,
     authenticated: false,
@@ -34,7 +25,7 @@ end
     password: '123456',
     first_name: name.capitalize,
     last_name: Faker::Name.last_name,
-    cpf: random_cpf,
+    cpf: CPF.generate,
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     address: Faker::Address.street_name,
     authenticated: true,
@@ -46,7 +37,7 @@ end
     password: '123456',
     first_name: name.capitalize,
     last_name: Faker::Name.last_name,
-    cpf: random_cpf,
+    cpf: CPF.generate,
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     address: Faker::Address.street_name,
     authenticated: true,

@@ -34,6 +34,9 @@ gem 'devise'
 # Cria fake seeds
 gem 'faker'
 
+# Valida CPFs
+gem "cpf_cnpj"
+
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'

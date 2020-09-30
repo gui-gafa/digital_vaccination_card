@@ -7,5 +7,7 @@ class AddColumnsToUser < ActiveRecord::Migration[6.0]
     add_column :users, :address, :string
     add_column :users, :authenticated, :boolean
     add_column :users, :role, :string
+
+    add_index :users, :cpf,                unique: true
   end
 end
