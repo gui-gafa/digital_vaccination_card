@@ -5,6 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Dose.destroy_all
+Vaccine.destroy_all
+VaccineType.destroy_all
+User.destroy_all
 
 def random_cpf
   numbers = (0..9).to_a
@@ -56,7 +60,7 @@ end
 
 # seeds de vaccine_types
 
- VaccineType.create(name:'Vacina BCG', prevents: 'Tuberculose – principalmente as formas graves, como meningite tuberculosa e tuberculose miliar (espalhada pelo corpo).', composition:'É composta pelo bacilo de Calmette-Guérin – origem do nome BCG – obtido pela atenuação (enfraquecimento) de uma das bactérias que causam a tuberculose. Completam sua composição o glutamato de sódio e a solução fisiológica (soro a 0,9%).', indication:'A vacina é indicada de rotina a partir do nascimento até antes de a criança completar 5 anos de idade.')
+  VaccineType.create(name:'Vacina BCG', prevents: 'Tuberculose – principalmente as formas graves, como meningite tuberculosa e tuberculose miliar (espalhada pelo corpo).', composition:'É composta pelo bacilo de Calmette-Guérin – origem do nome BCG – obtido pela atenuação (enfraquecimento) de uma das bactérias que causam a tuberculose. Completam sua composição o glutamato de sódio e a solução fisiológica (soro a 0,9%).', indication:'A vacina é indicada de rotina a partir do nascimento até antes de a criança completar 5 anos de idade.')
   VaccineType.create(name:'Vacina dengue', prevents: 'Infecção causada pelos quatro sorotipos de dengue: DEN1, DEN2, DEN3 e DEN4. A eficácia na prevenção da doença é de 65,5%; na prevenção de dengue grave e hemorrágica é de 93% e de internação é de mais de 80%.', composition:'Trata-se de vacina atenuada, composta pelos quatro sorotipos vivos do vírus dengue, obtidos separadamente por tecnologia de DNA recombinante. Contém ainda aminoácidos essenciais (incluindo fenilalanina), aminoácidos não essenciais, cloridrato de arginina, sacarose, trealose di-hidratada, sorbitol, trometamol e ureia. O diluente é constituído por cloreto de sódio e água para injeções. Não contém adjuvantes e conservantes.', indication:'A vacina está licenciada para crianças a partir de 9 anos de idade, adolescentes e adultos até 45 anos e é recomendada para indivíduos previamente infectados por um dos vírus da dengue (soropositivos com ou sem história da doença).')
   VaccineType.create(name:'Vacina dupla bacteriana do tipo adulto – dT', prevents: 'Difteria e tétano.', composition:'Trata-se de vacina inativada, portanto, não tem como causar a doença.', indication:'A vacina é utilizada na rede pública para a proteção das pessoas que não iniciaram ou não terminaram o esquema contra difteria e tétano até os 7 anos de idade e para as doses de reforço a cada dez anos.')
   VaccineType.create(name:'Vacina dupla bacteriana infantil – DT', prevents: 'Difteria e tétano.', composition:'Trata-se de vacina inativada, portanto, não tem como causar a doença.', indication:'Para crianças menores de 7 anos de idade, que tenham apresentado encefalite nos sete dias subsequentes à administração de dose anterior de vacina contendo componente coqueluche (DTPw ou DTPa).')
@@ -88,3 +92,24 @@ end
   VaccineType.create(name:'Vacina tetraviral (sarampo, caxumba, rubéola e varicela) – SCR-V', prevents: 'Sarampo, caxumba, rubéola e varicela.', composition:'Trata-se de vacina atenuada, contendo vírus vivos “enfraquecidos” do sarampo, da rubéola, da caxumba e da varicela (catapora), lactose anidra, sorbitol, manitol, aminoácidos, traços de neomicina e água para injeção. Contém traços de proteína do ovo de galinha usado no processo de fabricação da vacina.', indication:'A vacina SCR-V está recomendada para crianças e adolescentes com menos de 12 anos em substituição às vacinas tríplice viral (SCR) e varicela, quando a aplicação destas duas for coincidente. O Programa Nacional de Imunizações (PNI) adotou a vacina SCR-V aos 15 meses, como segunda dose da SCR e primeira da varicela.')
   VaccineType.create(name:'Vacina varicela (catapora)', prevents: 'Varicela (catapora).', composition:'Trata-se de vacina atenuada, contendo vírus vivos “enfraquecidos” da varicela, além de gelatina, traços de neomicina, água para injeção. Não contém traços de proteína do ovo de galinha.', indication:'É recomendada de rotina para crianças a partir de 12 meses (excepcionalmente, em situações de surto, por exemplo, também para crianças menores, a partir de 9 meses). Todas as crianças, adolescentes e adultos suscetíveis (que não tiveram catapora) devem ser vacinados.')
   VaccineType.create(name:'Palivizumabe', prevents: 'As formas graves de infecção pelo vírus sincicial respiratório (VSR), em bebês de alto risco.', composition:'Trata-se de um anticorpo específico contra o VSR, elaborado por técnica de engenharia genética (imunização passiva).', indication:'Está indicado no Calendário de vacinação SBIm prematuro para os recém-nascidos pré-termo com menos de 29 semanas de idade gestacional no primeiro ano de vida; para aqueles nascidos entre 29 e 32 semanas, até o sexto mês; e para portadores de doenças cardíacas e pulmonares nos dois primeiros anos de vida, independente da idade gestacional.')
+
+  # seeds de vaccine 0 a 10 vacinas para cada usuario Cidadão
+  
+   User.where(role: "Cidadão").each do |user|
+    rand(0..10).times do
+      Vaccine.create(user_comment: 'loren ipsum', user_id: user.id, vaccine_type_id: VaccineType.all[rand(0..VaccineType.count - 1)].id )
+    end
+   end
+
+   #seed de doses 1 a 3 doses por vacina
+
+   Vaccine.all.each do |vaccine|
+    rand(1..3).times do
+      if 1 == rand(0..1)
+        userid = User.where(role: 'Profissional da Saúde')[rand(0..User.where(role: 'Profissional da Saúde').count - 1)]
+        Dose.create(date: rand(10.years).seconds.ago, user_id: userid.id, vaccine_id: vaccine.id)
+      else
+        Dose.create(date: rand(10.years).seconds.ago, user_id: nil, vaccine_id: vaccine.id)
+      end
+    end
+   end
