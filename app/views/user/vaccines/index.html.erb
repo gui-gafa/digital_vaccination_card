@@ -1,3 +1,18 @@
-index.html.erb
+
 <%= to_currency(300.12) %>
+
+
+<h1><%= "test Search form " %></h1>
+
+<div class="search_vaccine">
+  <h2> SEARCH TEST </h2>
+  <%= form_tag user_vaccines_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Digite as informações para busca..."
+  %>
+  <%= submit_tag "Pesquisar", class: "btn btn-primary m-auto" %>
+  <% end %>
+</div>
 
