@@ -10,8 +10,11 @@ Vaccine.destroy_all
 VaccineType.destroy_all
 User.destroy_all
 
+# guilheme citzen cpf: 33647778451
+# guilherme sus cpf: 69885871446
+# guilherme admin cpf: 22750758874
 
-['guilherme', 'lourdes', 'maique', 'marcio'].each do |name|
+['lourdes', 'maique', 'marcio'].each do |name|
   User.create(
     email: "#{name}@gmail.com",
     password: '123456',
@@ -42,6 +45,44 @@ User.destroy_all
     first_name: name.capitalize,
     last_name: Faker::Name.last_name,
     cpf: CPF.generate,
+    birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+    address: Faker::Address.street_name,
+    authenticated: true,
+    role: 'Administrador'
+    )
+end
+
+['guilherme'].each do |name|
+  User.create(
+    email: "#{name}@gmail.com",
+    password: '123456',
+    first_name: name.capitalize,
+    last_name: Faker::Name.last_name,
+    cpf: "33647778451",
+    birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+    address: Faker::Address.street_name,
+    authenticated: false,
+    role: 'Cidadão'
+    )
+
+  User.create(
+    email: "#{name}@sus.com",
+    password: '123456',
+    first_name: name.capitalize,
+    last_name: Faker::Name.last_name,
+    cpf: '69885871446',
+    birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+    address: Faker::Address.street_name,
+    authenticated: true,
+    role: 'Profissional da Saúde'
+    )
+
+  User.create(
+    email: "#{name}@admin.com",
+    password: '123456',
+    first_name: name.capitalize,
+    last_name: Faker::Name.last_name,
+    cpf: '22750758874',
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     address: Faker::Address.street_name,
     authenticated: true,
@@ -85,7 +126,7 @@ end
   VaccineType.create(name:'Palivizumabe', prevents: 'As formas graves de infecção pelo vírus sincicial respiratório (VSR), em bebês de alto risco.', composition:'Trata-se de um anticorpo específico contra o VSR, elaborado por técnica de engenharia genética (imunização passiva).', indication:'Está indicado no Calendário de vacinação SBIm prematuro para os recém-nascidos pré-termo com menos de 29 semanas de idade gestacional no primeiro ano de vida; para aqueles nascidos entre 29 e 32 semanas, até o sexto mês; e para portadores de doenças cardíacas e pulmonares nos dois primeiros anos de vida, independente da idade gestacional.')
 
   # seeds de vaccine 0 a 10 vacinas para cada usuario Cidadão
-  
+
    User.where(role: "Cidadão").each do |user|
     rand(0..10).times do
       Vaccine.create(user_comment: 'loren ipsum', user_id: user.id, vaccine_type_id: VaccineType.all[rand(0..VaccineType.count - 1)].id )
@@ -96,11 +137,12 @@ end
 
    Vaccine.all.each do |vaccine|
     rand(1..3).times do
+      # random pra decidir se a dose vai estar validada ou não
       if 1 == rand(0..1)
-        userid = User.where(role: 'Profissional da Saúde')[rand(0..User.where(role: 'Profissional da Saúde').count - 1)]
-        Dose.create(date: rand(10.years).seconds.ago, user_id: userid.id, vaccine_id: vaccine.id)
+        user = User.where(role: 'Profissional da Saúde')[rand(0..User.where(role: 'Profissional da Saúde').count - 1)]
+        Dose.create(date: rand(10.years).seconds.ago, user: user, vaccine: vaccine)
       else
-        Dose.create(date: rand(10.years).seconds.ago, user_id: nil, vaccine_id: vaccine.id)
+        Dose.create(date: rand(10.years).seconds.ago, vaccine: vaccine)
       end
     end
    end
