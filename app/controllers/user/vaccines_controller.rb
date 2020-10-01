@@ -13,14 +13,17 @@ class User::VaccinesController < ApplicationController
 
   def new
     @vaccine = Vaccine.new
+    @dose = Dose.new
   end
 
   def create
     @vaccine = Vaccine.new(vaccine_params)
+    @dose = Dose.new(dose_params)
     @vaccine.user = current_user
+    @dose.vaccine = @vaccine
     # criar a primeira dose
-    if @vaccine.save
-      redirect_to vaccines_path, notice: 'Vacina cadastrada com sucesso.'
+    if @vaccine.save && @dose.save
+      redirect_to user_vaccines_path, notice: 'Vacina cadastrada com sucesso.'
     else
       render :new
     end
@@ -28,5 +31,8 @@ class User::VaccinesController < ApplicationController
 
   def vaccine_params
     params.require(:vaccine).permit(:vaccine_type_id)
+  end
+  def dose_params
+    params.require(:vaccine).require(:dose).permit(:date)
   end
 end
