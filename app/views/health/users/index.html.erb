@@ -14,8 +14,8 @@
     </div>
     <% end %>
   </div>
-  <% if @vaccines %>
-    <% @vaccines.each do |vaccine| %>
+  <% if @users %>
+    <% @users.each do |vaccine| %>
       <div class="wrapper">
         <div class="vaccine-card">
           <div class="card-info">
@@ -37,16 +37,6 @@
               <% end %>
           </div>
         </div>
-        <% vaccine.doses.each_with_index do |dose, index| %>
-          <div class="dose-card">
-            <div class="card-title text-center" style="font-size: 17px">
-              <p>Dose <%= index + 1 %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
-            </div>
-            <div class="card-description text-center">
-              <%= dose.date.strftime("%d/%m/%Y") %>
-            </div>
-          </div>
-        <% end %>
       </div>
     <% end %>
   <% else %>

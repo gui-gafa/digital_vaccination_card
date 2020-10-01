@@ -1,27 +1,52 @@
+.wrapper {
+  display: flex;
+}
+
 .vaccine-card {
   background-color: #fff;
   border: none;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
   box-sizing: border-box;
-  margin: 40px;
+  margin: 40px 20px;
   padding: 20px 28px;
-  width: 90%;
+  // width: 90%;
   display: flex;
   justify-content: space-between;
+  flex-grow: 1;
   .card-info {
-    width: 540px;
-    .card-title {
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .card-description {
-      color: #77757a;
-      font-size: 14px;
-    }
+    width: 500px;
+
   }
   .card-actions {
     display: flex;
     align-items: center;
   }
 }
+
+.card-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.card-description {
+  color: #77757a;
+  font-size: 14px;
+}
+
+.dose-card {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  box-sizing: border-box;
+  margin: 40px 10px;
+  padding: 20px 10px;
+  width: 200px;
+  // display: flex;
+  // justify-content: space-between;
+  .card-actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
