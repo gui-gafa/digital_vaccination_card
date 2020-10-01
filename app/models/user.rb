@@ -11,4 +11,11 @@ class User < ApplicationRecord
   def cpf_invalid
     return errors.add(:cpf, "cpf inválido") unless CPF.valid?(cpf)
   end
+
+  include PgSearch::Model
+    pg_search_scope :search_user,
+    against: [:cpf],
+    using: {
+      tsearch: {prefix: true}
+    }
 end
