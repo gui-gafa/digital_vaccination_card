@@ -2,7 +2,9 @@ class Health::UsersController < ApplicationController
   def index
     # Colocar os ifs pra dar redirect caso não seja um citzen
     if params[:query].present?
-      @vaccines = Vaccine.search_global_vacinne(params[:query])
+      @users = User.search_user(params[:query])
+    elsif params[:query] == ""
+      @users = "vazio"
     else
       @users = User.all
     end

@@ -1,50 +1,42 @@
 <div class="container-sm">
-  <h1 class='text-center my-4' ><%= "Sua Carteira de Vacinação" %></h1>
+  <h1 class='text-center my-4' ><%= "BUSCA POR TERRÁQUEOS" %></h1>
 
   <div class="search_vaccine">
-    <%= form_tag user_vaccines_path, method: :get do %>
+    <%= form_tag health_users_path, method: :get do %>
     <div class="d-flex" style="width: 80%; margin:0 auto;">
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
         style: "width: 80%",
-        placeholder: "Procure por uma vacina tomada"
+        placeholder: "Digite o CPF do cidadão Brasileiro ou Estrangeiro: "
       %>
       <%= submit_tag "Pesquisar", class: "btn btn-primary m-auto" %>
     </div>
     <% end %>
   </div>
-  <% if @users %>
-    <% @users.each do |vaccine| %>
-      <div class="wrapper">
-        <div class="vaccine-card">
-          <div class="card-info">
-            <div class="card-title">
-              <%= vaccine.vaccine_type.name %>
+
+    <h3> SE CPF FOR VAZIO RETORNA ALERTA</h3>
+    <h3> SENÃO RETORNA O CIDADÃO </h3>
+    <h4> Implementar link de Acesso para show </h4>
+
+    <% if @users == "vazio" %>
+      <h2><strong> <%= "Digite um CPF Válido" %> </strong></h2>
+    <% else %>
+      <% @users.each do |user| %>
+        <div class="wrapper">
+          <div class="vaccine-card">
+            <div class="card-info">
+              <div class="card-title">
+                Nome: <%= user.first_name %> <%= user.last_name %>
+              </div>
+              <div class="card-description">
+                <p> CPF: <%= user.cpf %> </p>
+                <p> Endereço: <%= user.address %> </p>
+                <p> Email: <%= user.email %> </p>
+              </div>
             </div>
-            <div class="card-description">
-              Doses Tomadas: <%= vaccine.dose_count %> | Última dose: <%= vaccine.last_dose_date %>
-            </div>
-          </div>
-          <div class="card-actions">
-              <%= link_to root_path, class: 'br-button' do %>
-                <i class="fas fa-edit"></i>
-                Detalhes
-              <% end %>
-              <%= link_to root_path, class: 'br-button' do %>
-                <i class="fas fa-eraser"></i>
-                Delete
-              <% end %>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% else %>
-    <p>Sem vacinas por enquanto</p>
-  <% end %>
-  <div class="text-right">
-    <!-- Ideia de colocar esse botão como fixado na tela -->
-    <%= link_to "Nova Vacina", new_user_vaccine_path, class: 'br-button my-4', action:'' %>
-  </div>
-
 </div>

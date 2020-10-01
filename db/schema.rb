@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_122412) do
     t.string "address"
     t.boolean "authenticated"
     t.string "role"
-    t.index ["cpf"], name: "index_users_on_cpf", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

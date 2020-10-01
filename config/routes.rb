@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :vaccine_types, only:[:show]
   end
   namespace :health do
-    resources :user, only: [:index]
+    resources :users, only: [:index]
   end
   devise_for :users
   root to: 'pages#home'
