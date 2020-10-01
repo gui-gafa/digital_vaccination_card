@@ -34,8 +34,13 @@ gem 'devise'
 # Cria fake seeds
 gem 'faker'
 
+<<<<<<< HEAD
+# Valida CPFs
+gem "cpf_cnpj"
+=======
 # Cria PG Search
 gem 'pg_search', '~> 2.3.0'
+>>>>>>> 47594f3dba7e4c52b81d00b2dc6b01f4995a80f4
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
