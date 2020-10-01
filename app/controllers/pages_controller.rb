@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     if current_user.role == "Cidadão"
-      render 'user/vaccines/index'
+      redirect_to user_vaccines_path
     elsif current_user.role == "Profissional da Saúde"
       render 'health/vaccines/index'
     else

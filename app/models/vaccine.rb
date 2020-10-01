@@ -12,4 +12,12 @@ class Vaccine < ApplicationRecord
   using: {
     tsearch: {prefix: true}
   }
+
+  def last_dose_date
+    doses ? doses.order(:date).last.date.strftime("%d/%m/%Y") : "-"
+  end
+
+  def dose_count
+    doses ? doses.count : 0
+  end
 end

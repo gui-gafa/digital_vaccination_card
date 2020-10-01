@@ -1,26 +1,29 @@
 <div class="container" style='width: 500px;'>
-  <h2>Entrar</h2>
-  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-inputs">
-      <%= f.input :cpf,
-                  label: 'CPF',
-                  required: false,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" } %>
-      <%= f.input :password,
-                  required: false,
-                  input_html: { autocomplete: "current-password" } %>
-      <!-- Ideia futura para logar com o role específico -->
+  <div class="login-card">
+    <h2>Entrar</h2>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :cpf,
+                    label: 'CPF',
+                    required: false,
+                    autofocus: true,
+                    input_html: { autocomplete: "email" } %>
+        <%= f.input :password,
+                    label: 'Senha',
+                    required: false,
+                    input_html: { autocomplete: "current-password" } %>
+        <!-- Ideia futura para logar com o role específico -->
 
-      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-    </div>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
 
-    <div class="form-actions text-center">
-     <%= f.button :submit, "Entrar", class: 'br-button mb-2', primary:'' %>
-     <!-- <input type="submit" name="commit" value="Entrar" class="btn br-button" data-disable-with="Entrar" primary=""> -->
+      <div class="form-actions text-center">
+       <%= f.button :submit, "Entrar", class: 'br-button mb-2', primary:'' %>
+       <!-- <input type="submit" name="commit" value="Entrar" class="btn br-button" data-disable-with="Entrar" primary=""> -->
+      </div>
+    <% end %>
+    <div class="text-center">
+      <%= render "devise/shared/links" %>
     </div>
-  <% end %>
-  <div class="text-center">
-    <%= render "devise/shared/links" %>
   </div>
 </div>

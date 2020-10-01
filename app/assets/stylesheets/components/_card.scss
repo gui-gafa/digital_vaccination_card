@@ -1,0 +1,27 @@
+.vaccine-card {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  box-sizing: border-box;
+  margin: 40px;
+  padding: 20px 28px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  .card-info {
+    width: 540px;
+    .card-title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .card-description {
+      color: #77757a;
+      font-size: 14px;
+    }
+  }
+  .card-actions {
+    display: flex;
+    align-items: center;
+  }
+}

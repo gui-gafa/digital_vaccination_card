@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :vaccine_types
   end
   namespace :user do
-    resources :vaccines, only:[:index, :show]
+    resources :vaccines, only:[:index, :show, :new]
     resources :vaccine_types, only:[:show]
   end
   devise_for :users
