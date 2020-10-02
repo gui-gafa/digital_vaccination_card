@@ -1,30 +1,26 @@
 <div class="br-header" style="width: 100%">
     <div class="container" style="width: 100%; display:flex;justify-content:space-between">
-        <div>
+        <div class="d-flex">
             <div class="logo">
                 <%= image_tag "sus_logo.png", alt: "sus" %>
                 <%# <div class="sign width 100%">VacinasApp</div> %>
             </div>
-            <div class="menu" style="width:100%">
-                <button class="br-button" type="button" circle mini>
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="title">Carteira de Vacina Digital</div>
-                <div class="subtitle mb-2">Sempre em dia com a sua saúde</div>
+            <div class="menu ml-2 my-4" style="width:100%">
+                <div class="title mt-2" style="font-size: 20px">Carteira de Vacina Digital</div>
+                <div class="subtitle mb-2 text-left ml-0">Sempre em dia com a sua saúde</div>
             </div>
         </div>
         <div>
-            <div class="actions" style="max-width:100%">
+            <div class="actions mt-4" style="max-width:100%">
                 <div class="links">
                     <button class="br-button" type="button" circle mini>
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
                     <ul>
                         <li class="title">Acesso Rápido</li>
-                        <li><a href="javascript:void(0);">Link de acesso 1</a></li>
-                        <li><a href="javascript:void(0);">Link de acesso 2</a></li>
-                        <li><a href="javascript:void(0);">Link de acesso 3</a></li>
-                        <li><a href="javascript:void(0);">Link de acesso 4</a></li>
+                        <li><a href="javascript:void(0);">Sua Carteira</a></li>
+                        <li><a href="javascript:void(0);">Calendário de Vacinação</a></li>
+                        <li><a href="javascript:void(0);">Campanhas Vigentes</a></li>
                     </ul>
                 </div>
                 <div class="functions">
@@ -64,34 +60,49 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
+                <% if current_user.nil? %>
                 <div class="login">
+                    <%= link_to new_user_session_path do %>
                     <button class="br-button" type="button" mini>
                         <i class="fas fa-user"></i><span class="ml-1">Entrar</span>
                     </button>
+                    <% end %>
                 </div>
+                <% else %>
+                <div class="login">
+                    <%= link_to destroy_user_session_path, method: :delete do %>
+                    <button class="br-button" type="button" mini>
+                        <i class="fas fa-user"></i><span class="ml-1">Sair</span>
+                    </button>
+                    <% end %>
+                </div>
+                <% end %>
+                <% if !current_user.nil? %>
                 <div class="avatar">
                     <div class="br-badge" danger>
                         <div class="icon">5</div>
                         <div class="content">
-                            <div class="br-avatar">
-                                <div class="image">
-                                    <!-- <img src="https://picsum.photos/id/823/400" alt="Avatar" /> -->
-                                    <!--  -->
-                                    <%= image_tag "https://avatars2.githubusercontent.com/u/66792796?v=4",
-                                    class: "dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-                                    </div>
-                                </div>
-                            </div>
+                              <div class="br-avatar">
+                                  <div class="image">
+                                      <!-- <img src="https://picsum.photos/id/823/400" alt="Avatar" /> -->
+                                      <!--  -->
+                                        <%= image_tag "https://avatars2.githubusercontent.com/u/66792796?v=4",
+                                        class: "dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                                        </div>
+                                  </div>
+                              </div>
                         </div>
                     </div>
                 </div>
+                <% end %>
+
             </div>
-            <div class="search" style="margin-left:auto">
+<!--             <div class="search" style="margin-left:auto">
                 <div class="br-input has-icon">
                     <label></label>
-                    <input class="has-icon" type="text" placeholder="Que vacina você procura?" />
+                    <input class="has-icon" type="text" placeholder="Quer saber sobre alguma vacina?" />
                     <button class="icon" type="button">
                         <span class="icon"><i class="fas fa-search"></i></span>
                     </button>
@@ -99,7 +110,7 @@
                 <button class="br-button search-close" type="button" circle mini>
                     <i class="fas fa-times"></i>
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
