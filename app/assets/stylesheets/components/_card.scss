@@ -23,11 +23,11 @@
   .card-title {
     font-weight: bold;
     font-size: 15px;
-    // flex: 0 0 500px;
+ 
   }
   .card-info {
     width: 380px;
-
+    flex: 1 0 380px;
   }
   .card-actions {
     display: flex;
