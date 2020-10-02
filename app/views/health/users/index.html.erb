@@ -1,5 +1,5 @@
 <div class="container-sm">
-  <h1 class='text-center my-4' ><%= "BUSCA POR TERRÁQUEOS" %></h1>
+  <h2 class='text-center my-4' ><%= "Busca pelo Cidadão" %> </h2>
 
   <div class="search_vaccine">
     <%= form_tag health_users_path, method: :get do %>
@@ -27,7 +27,7 @@
           <div class="vaccine-card">
             <div class="card-info">
               <div class="card-title">
-                Nome: <%= user.first_name %> <%= user.last_name %>
+                Nome: <%= link_to "#{user.first_name}", health_vaccines_path(user.id) %> <%= user.last_name %>
               </div>
               <div class="card-description">
                 <p> CPF: <%= user.cpf %> </p>
