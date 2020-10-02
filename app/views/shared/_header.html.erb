@@ -1,20 +1,20 @@
 <div class="br-header" style="width: 100%">
     <div class="container" style="width: 100%; display:flex;justify-content:space-between">
-        <div>
+        <div style="display:flex">
             <div class="logo">
                 <%= image_tag "sus_logo.png", alt: "sus" %>
                 <%# <div class="sign width 100%">VacinasApp</div> %>
             </div>
-            <div class="menu" style="width:100%">
-                <button class="br-button" type="button" circle mini>
+            <div class="menu ml-2 my-4" style="width:100%">
+                <%# <button class="br-button" type="button" circle mini>
                     <i class="fas fa-bars"></i>
-                </button>
-                <div class="title">Carteira de Vacina Digital</div>
-                <div class="subtitle mb-2">Sempre em dia com a sua saúde</div>
+                </button> %>
+                <div class="title mt-2" style="font-size:20px">Carteira de Vacina Digital</div>
+                <div class="subtitle mb-2 text-left" style="margin-left:0">Sempre em dia com a sua saúde</div>
             </div>
         </div>
         <div>
-            <div class="actions" style="max-width:100%">
+            <div class="actions mt-4" style="max-width:100%">
                 <div class="links">
                     <button class="br-button" type="button" circle mini>
                         <i class="fas fa-ellipsis-v"></i>
@@ -59,11 +59,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="search-btn">
-                    <button class="br-button" type="button" circle mini>
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+               
                 <div class="login">
                     <button class="br-button" type="button" mini>
                         <i class="fas fa-user"></i><span class="ml-1">Entrar</span>
@@ -88,18 +84,7 @@
                     </div>
                 </div>
             </div>
-            <div class="search" style="margin-left:auto">
-                <div class="br-input has-icon">
-                    <label></label>
-                    <input class="has-icon" type="text" placeholder="Que vacina você procura?" />
-                    <button class="icon" type="button">
-                        <span class="icon"><i class="fas fa-search"></i></span>
-                    </button>
-                </div>
-                <button class="br-button search-close" type="button" circle mini>
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+            
         </div>
     </div>
 </div>
