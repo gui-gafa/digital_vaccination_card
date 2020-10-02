@@ -39,7 +39,7 @@
         </div>
         <% vaccine.doses.each_with_index do |dose, index| %>
           <div class="dose-card">
-            <div class="card-title text-center" style="font-size: 17px">
+            <div class="card-title text-center">
               <p>Dose <%= index + 1 %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
             </div>
             <div class="card-description text-center">
