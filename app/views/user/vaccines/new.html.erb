@@ -9,6 +9,7 @@
       <%= f.simple_fields_for @dose do |dose_form| %>
         <%= dose_form.input :date,
                             as: :date,
+                            label: "Data da 1ª Dose",
                             input_html: {class: "br-datepicker", style: "margin: 0 !important;"},
                             order: [:day, :month, :year]
                              %>
