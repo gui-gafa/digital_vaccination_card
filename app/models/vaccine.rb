@@ -1,8 +1,10 @@
 class Vaccine < ApplicationRecord
   belongs_to :user
   belongs_to :vaccine_type
-  has_many :doses
+  has_many :doses, dependent: :destroy
+  has_many :users, through: :doses
 
+  validates :vaccine_type, uniqueness: true
   include PgSearch::Model
   pg_search_scope :search_global_vacinne,
   against: [:user_comment],
@@ -19,5 +21,9 @@ class Vaccine < ApplicationRecord
 
   def dose_count
     doses ? doses.count : 0
+  end
+
+  def valid_doses?
+    users.count.positive? ? true : false
   end
 end
