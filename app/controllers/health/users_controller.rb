@@ -6,7 +6,7 @@ class Health::UsersController < ApplicationController
     elsif params[:query] == ""
       @users = "vazio"
     else
-      @users = "abacaxi"
+      @users = "sem_pesquisa"
     end
   end
 

@@ -21,14 +21,14 @@
 
     <% if @users == "vazio" %>
       <h3 class="text-center" ><strong> <%= "Digite um CPF Válido" %> </strong></h3>
-    <% elsif @users == "abacaxi" %>
+    <% elsif @users == "sem_pesquisa" %>
     <% else %>
       <% @users.each do |user| %>
         <div class="wrapper">
           <div class="vaccine-card">
             <div class="card-info">
               <div class="card-title">
-                Nome: <%= link_to "#{user.first_name}", health_vaccines_path(user.id) %> <%= user.last_name %>
+                Nome: <%= link_to "#{user.first_name}", health_vaccines_path(user_id: user.id) %> <%= user.last_name %>
               </div>
               <div class="card-description">
                 <p> CPF: <%= user.cpf %> </p>
