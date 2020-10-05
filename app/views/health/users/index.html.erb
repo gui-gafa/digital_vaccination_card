@@ -15,12 +15,13 @@
     <% end %>
   </div>
 
-    <h3> SE CPF FOR VAZIO RETORNA ALERTA</h3>
+<!--     <h3> SE CPF FOR VAZIO RETORNA ALERTA</h3>
     <h3> SENÃO RETORNA O CIDADÃO </h3>
-    <h4> Implementar link de Acesso para show </h4>
+    <h4> Implementar link de Acesso para show </h4> -->
 
     <% if @users == "vazio" %>
-      <h2><strong> <%= "Digite um CPF Válido" %> </strong></h2>
+      <h3 class="text-center" ><strong> <%= "Digite um CPF Válido" %> </strong></h3>
+    <% elsif @users == "abacaxi" %>
     <% else %>
       <% @users.each do |user| %>
         <div class="wrapper">
