@@ -3,8 +3,11 @@ class Vaccine < ApplicationRecord
   belongs_to :vaccine_type
   has_many :doses, dependent: :destroy
   has_many :users, through: :doses
+  
+  # esse validador não está correto, pois queremos que uma vaccine_type seja única para um mesmo user, não para todas vaccines. por isso o scope. 
+  # validates :vaccine_type, uniqueness: true
+  validates :vaccine_type, uniqueness: { scope: :user}
 
-  validates :vaccine_type, uniqueness: true
   include PgSearch::Model
   pg_search_scope :search_global_vacinne,
   against: [:user_comment],
