@@ -6,12 +6,12 @@
     <%= image_tag "sus-logo-branco-hp.png" %>
   <% end %>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" style="padding:0 20px" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     
   </button>
     <div class="login">
         <%= link_to new_user_session_path do %>
-        <button class="br-button" type="button" mini>
+        <button class="br-button login-home" type="button" mini>
             <i class="fas fa-user" style="color:white"></i><span class="ml-1" style="color:white">Entrar</span>
         </button>
         <% end %>
