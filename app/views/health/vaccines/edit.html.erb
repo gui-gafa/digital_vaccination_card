@@ -1,0 +1,28 @@
+<div class="mx-auto w-25">
+  <%= simple_form_for(@vaccine, url: health_vaccine_path, html: { class: "text-center" }) do |f| %>
+    <%= f.simple_fields_for :dose_ids do |dose_form| %>
+      <% @doses.each_with_index do |dose, index| %>
+        <div class="dose-card" style="position:relative;">
+          <div class="card-title text-center">
+            <p>
+              Dose <%= index + 1 %>
+            </p>
+          </div>
+          <div class="card-description text-center">
+            <%= dose.date.strftime("%d/%m/%Y") %>
+          </div>
+          <div id="gambiarradoandrezao" style="position: absolute; top:8px;left:8px;">
+            <%= dose_form.input :id,
+                                collection: [dose],
+                                label: "",
+                                required: false,
+                                include_hidden: false,
+                                as: :check_boxes  %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <%= f.submit "Validar", class: "br-button", primary:"", data: { confirm: 'Tem certeza que deseja Autenticar?' }%>
+  <% end %>
+</div>
+

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1 class='text-center my-4' ><%= "Sua Carteira de Vacinação" %></h1>
+  <h1 class='text-center' ><%= "Sua Carteira de Vacinação" %></h1>
 
   <div class="search_vaccine mb-5">
     <%= form_tag user_vaccines_path, method: :get do %>
@@ -48,7 +48,7 @@
             </div>
           </div>
         <% end %>
-        <button type="button" style="border: none;" data-toggle="modal" data-target="#modal-window<%= vaccine.id %>">
+        <button type="button" style="border: none; background-color: transparent;" data-toggle="modal" data-target="#modal-window<%= vaccine.id %>">
           <div id="nova-dose" class="dose-card"
           style="border-style: dashed; border-color: rgba(0,0,0,0.3)">
             <div class="text-center">
