@@ -1,6 +1,25 @@
+// .navbar-home {
+//   position: absolute;
+//   width: 100%;
+//   background: transparent;
+//   box-shadow: none;
+//   .navbar-wagon-link {
+//     color: white;
+//     font-weight: bold;
+//   }
+// }
+#logo-home{
+  height:60px;
+  width:166px;
+}
+
 .navbar-lewagon {
+  position: absolute;
   justify-content: space-between;
   background: white;
+  background: transparent;
+  width: 100%;
+  color: white;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -8,5 +27,6 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 70px;
+  margin-top:15px;
 }
