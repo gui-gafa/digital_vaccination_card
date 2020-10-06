@@ -59,7 +59,7 @@ end
     first_name: name.capitalize,
     last_name: Faker::Name.last_name,
     cpf: "33647778451",
-    birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+    birth_date: '2020-05-01',
     address: Faker::Address.street_name,
     authenticated: false,
     role: 'Cidadão'
@@ -196,3 +196,72 @@ end
    SuggestedDose.create(month_age: 48, description: '1 dose ou duas doses', vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id)
    SuggestedDose.create(month_age: 60, description: '1 dose ou duas doses', vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id)
    SuggestedDose.create(month_age: 72, description: '1 dose ou duas doses', vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id)
+
+# seed com as novas tabelas
+   
+   SuggestedVaccine.create(description: 'Dose única', vaccine_type_id: VaccineType.find_by(name: 'Vacina BCG').id)
+   SuggestedVaccine.create(description: 'Dose ao nascer', vaccine_type_id: VaccineType.find_by(name: 'Vacina hepatite B').id)
+   SuggestedVaccine.create(description: '3 doses, 2 reforços com a vacina VOP', vaccine_type_id: VaccineType.find_by(name: 'Vacinas poliomielite - VIP').id)
+   SuggestedVaccine.create(description: '2 doses de reforço', vaccine_type_id: VaccineType.find_by(name: 'Vacinas poliomielite - VOP').id)
+   SuggestedVaccine.create(description: '2 doses', vaccine_type_id: VaccineType.find_by(name: 'Vacina rotavírus').id)
+   SuggestedVaccine.create(description: '3 doses, 2 reforços com a vacina DTP', vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice bacteriana de células inteiras combinada com Hib e hepatite B (DTPw­-HB/Hib)').id)
+   SuggestedVaccine.create(description: '2 doses, reforço', vaccine_type_id: VaccineType.find_by(name: 'Vacinas pneumocócicas conjugadas').id)
+   SuggestedVaccine.create(description: '2 doses, 1º reforço', vaccine_type_id: VaccineType.find_by(name: 'Vacina meningocócica C conjugada').id)
+   SuggestedVaccine.create(description: '1 dose, reforço', vaccine_type_id: VaccineType.find_by(name: 'Vacina febre amarela – FA').id)
+   SuggestedVaccine.create(description: '2 doses (1ª dose com SCR e 2ª dose com SCRV)', vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice viral (sarampo, caxumba e rubéola) – SCR').id)
+   SuggestedVaccine.create(description: '1 dose (corresponde a segunda dose da SCR e primeira de varicela', vaccine_type_id: VaccineType.find_by(name: 'Vacina tetraviral (sarampo, caxumba, rubéola e varicela) – SCR-V').id)
+   SuggestedVaccine.create(description: '1 dose', vaccine_type_id: VaccineType.find_by(name: 'Vacina hepatite A').id)
+   SuggestedVaccine.create(description: 'Considerar doses anteriores (3 doses)', vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice bacteriana acelular infantil – DTPa').id)
+   SuggestedVaccine.create(description: '3 doses Considerar doses anteriores com penta e DTP', vaccine_type_id: VaccineType.find_by(name: 'Vacina dupla bacteriana infantil – DT').id)
+   SuggestedVaccine.create(description: '2 doses', vaccine_type_id: VaccineType.find_by(name: 'Vacina HPV4').id)
+   SuggestedVaccine.create(description: '1 dose. Uma dose a depender da situação vacinal anterior com a PNM10v', vaccine_type_id: VaccineType.find_by(name: 'Vacina pneumocócica polissacarídica 23-valente – VPP23').id)
+   SuggestedVaccine.create(description: '1 dose (corresponde a segunda dose da varicela)', vaccine_type_id: VaccineType.find_by(name: 'Vacina varicela (catapora)').id)
+   SuggestedVaccine.create(description: '1 dose ou duas doses', vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id)
+   
+   
+   ReccomendedDose.create(month_age: 0, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina BCG').id).id)
+   ReccomendedDose.create(month_age: 0, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina hepatite B').id).id)
+   ReccomendedDose.create(month_age: 2, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas poliomielite - VIP').id).id)
+   ReccomendedDose.create(month_age: 4, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas poliomielite - VIP').id).id)
+   ReccomendedDose.create(month_age: 6, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas poliomielite - VIP').id).id)
+
+   ReccomendedDose.create(month_age: 15, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas poliomielite - VOP').id).id)
+   ReccomendedDose.create(month_age: 48, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas poliomielite - VOP').id).id)
+
+   ReccomendedDose.create(month_age: 2, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina rotavírus').id).id)
+   ReccomendedDose.create(month_age: 4, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina rotavírus').id).id)
+
+   ReccomendedDose.create(month_age: 2, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice bacteriana de células inteiras combinada com Hib e hepatite B (DTPw­-HB/Hib)').id).id)
+   ReccomendedDose.create(month_age: 4, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice bacteriana de células inteiras combinada com Hib e hepatite B (DTPw­-HB/Hib)').id).id)
+   ReccomendedDose.create(month_age: 6, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice bacteriana de células inteiras combinada com Hib e hepatite B (DTPw­-HB/Hib)').id).id)
+
+   ReccomendedDose.create(month_age: 2, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas pneumocócicas conjugadas').id).id)
+   ReccomendedDose.create(month_age: 4, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas pneumocócicas conjugadas').id).id)
+   ReccomendedDose.create(month_age: 12, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacinas pneumocócicas conjugadas').id).id)
+
+   ReccomendedDose.create(month_age: 3, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina meningocócica C conjugada').id).id)
+   ReccomendedDose.create(month_age: 5, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina meningocócica C conjugada').id).id)
+   ReccomendedDose.create(month_age: 12, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina meningocócica C conjugada').id).id)
+
+   ReccomendedDose.create(month_age: 9, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina febre amarela – FA').id).id)
+   ReccomendedDose.create(month_age: 48, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina febre amarela – FA').id).id)
+
+   ReccomendedDose.create(month_age: 12, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice viral (sarampo, caxumba e rubéola) – SCR').id).id)
+   ReccomendedDose.create(month_age: 15, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina tetraviral (sarampo, caxumba, rubéola e varicela) – SCR-V').id).id)
+
+   ReccomendedDose.create(month_age: 15, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina hepatite A').id).id)
+   ReccomendedDose.create(month_age: 15, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice bacteriana acelular infantil – DTPa').id).id)
+   ReccomendedDose.create(month_age: 48, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina tríplice bacteriana acelular infantil – DTPa').id).id)
+
+   ReccomendedDose.create(month_age: 120, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina dupla bacteriana infantil – DT').id).id)
+   ReccomendedDose.create(month_age: 108, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina HPV4').id).id)
+   ReccomendedDose.create(month_age: 168, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina HPV4').id).id)
+
+   ReccomendedDose.create(month_age: 60, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina pneumocócica polissacarídica 23-valente – VPP23').id).id)
+   ReccomendedDose.create(month_age: 48, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina varicela (catapora)').id).id)
+   ReccomendedDose.create(month_age: 12, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
+   ReccomendedDose.create(month_age: 24, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
+   ReccomendedDose.create(month_age: 36, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
+   ReccomendedDose.create(month_age: 48, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
+   ReccomendedDose.create(month_age: 60, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
+   ReccomendedDose.create(month_age: 72, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)

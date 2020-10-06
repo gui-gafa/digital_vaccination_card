@@ -34,3 +34,18 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   // initModal();
 });
+
+// nao tenho certeza se é aqui nesse arquivo .js
+// javascript para alternar entre os tabs
+const divcarteira = document.querySelector("#carteira");
+
+const botao = document.querySelector("#toggle-btn");
+
+botao.addEventListener('click', () => {
+  if (divcarteira.style.display === "none") {
+    divcarteira.style.display = "block";
+  } else {
+    divcarteira.style.display = "none";
+  }
+
+});
