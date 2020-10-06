@@ -29,4 +29,8 @@ class Vaccine < ApplicationRecord
   def valid_doses?
     users.count.positive? ? true : false
   end
+
+  def comment
+    user_comment ? user_comment : "Sem comentários por enqaunto."
+  end
 end

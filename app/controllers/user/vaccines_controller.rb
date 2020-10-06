@@ -9,6 +9,7 @@ class User::VaccinesController < ApplicationController
   end
 
   def show
+    @vaccine = Vaccine.find(params[:id])
   end
 
   def new
@@ -34,6 +35,7 @@ class User::VaccinesController < ApplicationController
   def vaccine_params
     params.require(:vaccine).permit(:vaccine_type_id)
   end
+
   def dose_params
     params.require(:vaccine).require(:dose).permit(:date)
   end
