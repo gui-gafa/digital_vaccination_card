@@ -1,3 +1,8 @@
+<%#= render("shared/modal_new_dose")%>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#59">
+  Launch demo modal
+</button>
+
 <div class="container-fluid">
   <h1 class='text-center my-4' ><%= "Sua Carteira de Vacinação" %></h1>
 
@@ -16,6 +21,7 @@
   </div>
   <% if @vaccines %>
     <% @vaccines.each do |vaccine| %>
+    <% @my_vaccine = vaccine %>
       <div class="wrapper">
         <div class="vaccine-card">
           <div class="card-info">
@@ -27,10 +33,10 @@
             </div>
           </div>
           <div class="card-actions">
-              <%#= link_to root_path, class: 'br-button' do %>
-<!--                 <i class="fas fa-edit"></i>
-                Detalhes -->
-              <%# end %>
+              <%= link_to user_vaccine_path(vaccine), class: 'br-button' do %>
+                <i class="fas fa-edit"></i>
+                Detalhes
+              <% end %>
               <%= link_to user_vaccine_path(vaccine), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'br-button' do %>
                 <i class="fas fa-eraser"></i>
                 Delete
@@ -40,16 +46,17 @@
         <% vaccine.doses.order(:date).each_with_index do |dose, index| %>
           <div class="dose-card">
             <div class="card-title text-center">
-              <p>Dose <%= index + 1 %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
+              <p>Dose <%= index + 1 %> <%= vaccine.id %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
             </div>
             <div class="card-description text-center">
               <%= dose.date.strftime("%d/%m/%Y") %>
             </div>
           </div>
         <% end %>
-        <div class="dose-card" style="border-style: dashed; border-color: rgba(0,0,0,0.3)">
+        <div id="nova-dose" class="dose-card"
+        style="border-style: dashed; border-color: rgba(0,0,0,0.3)">
           <div class="text-center">
-            <%= link_to root_path do %>
+            <%= link_to render("shared/modal_reinventado"), :@batata => "batata" do %>
               <i class="far fa-plus-square" style="width:100%; text-align: center; font-size: 40px; color: rgba(0,0,0,0.4);"></i>
             <% end %>
             Nova Dose
