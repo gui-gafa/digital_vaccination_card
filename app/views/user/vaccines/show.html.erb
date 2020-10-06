@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <h1 class='text-center my-4 ' ><%= "Detalhes da sua vacina de #{@vaccine.vaccine_type.name }" %></h1>
+  <div class="vaccine-type-card">
+    <h2>O que previne?</h2>
+    <p> <%=@vaccine.vaccine_type.prevents%></p>
+    <h2>Composição:</h2>
+    <p> <%=@vaccine.vaccine_type.composition%></p>
+    <h2>O que previne?</h2>
+    <p> <%=@vaccine.vaccine_type.indication%></p>
+  </div>
+  <div class="vaccine-type-card">
+    <h2>Suas Observações:</h2>
+    <p><%= @vaccine.comment %></p>
+    <% if @vaccine.user_comment %>
+      <%= link_to "Editar Observação", root_path, class: "br-button", primary:""  %>
+    <% else %>
+      <%= link_to "Cadastrar Observação", root_path, class: "br-button", primary:"" %>
+    <% end %>
+  </div>
+
+  <h3 class='text-left my-4 ' >Doses Tomadas: </h3>
+  <% unless @vaccine.doses.present?  %>
+    <div class="vaccine-type-card">
+      <p>Sem Doses Cadastradas</p>
+    </div>
+
+  <% else %>
+    <% @vaccine.doses.order(:date).each_with_index do |dose, index| %>
+      <div class="vaccine-type-card">
+        <div class="card-info">
+          <p class="m-auto"><strong>Dose <%=index + 1%></strong>
+             | <strong>Data:</strong> <%= dose.date.strftime("%d/%m/%Y") %>
+             | <strong>Autenticada:</strong>
+            <% if dose.user.present? %>
+              <%= link_to "#{dose.user.first_name}",root_path  %>
+            <% else %>
+              Não autenticada.
+            <% end %>
+           </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
