@@ -3,8 +3,9 @@ Rails.application.routes.draw do
     resources :vaccine_types
   end
   namespace :user do
-    resources :vaccines, only:[:index, :show, :new, :create, :destroy]
+    resources :vaccines, only:[:index, :show, :new, :create, :destroy] do
       resources :doses, only: [:new, :create]
+    end
     resources :vaccine_types, only:[:show]
   end
   namespace :health do
