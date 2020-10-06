@@ -1,5 +1,5 @@
 <div class="container-sm">
-  <h1 class='text-center my-4' ><%= "BUSCA POR TERRÁQUEOS" %></h1>
+  <h2 class='text-center my-4' ><%= "Busca pelo Cidadão" %> </h2>
 
   <div class="search_vaccine">
     <%= form_tag health_users_path, method: :get do %>
@@ -15,19 +15,20 @@
     <% end %>
   </div>
 
-    <h3> SE CPF FOR VAZIO RETORNA ALERTA</h3>
+<!--     <h3> SE CPF FOR VAZIO RETORNA ALERTA</h3>
     <h3> SENÃO RETORNA O CIDADÃO </h3>
-    <h4> Implementar link de Acesso para show </h4>
+    <h4> Implementar link de Acesso para show </h4> -->
 
     <% if @users == "vazio" %>
-      <h2><strong> <%= "Digite um CPF Válido" %> </strong></h2>
+      <h3 class="text-center" ><strong> <%= "Digite um CPF Válido" %> </strong></h3>
+    <% elsif @users == "sem_pesquisa" %>
     <% else %>
       <% @users.each do |user| %>
         <div class="wrapper">
           <div class="vaccine-card">
             <div class="card-info">
               <div class="card-title">
-                Nome: <%= user.first_name %> <%= user.last_name %>
+                Nome: <%= link_to "#{user.first_name}", health_vaccines_path(user_id: user.id) %> <%= user.last_name %>
               </div>
               <div class="card-description">
                 <p> CPF: <%= user.cpf %> </p>

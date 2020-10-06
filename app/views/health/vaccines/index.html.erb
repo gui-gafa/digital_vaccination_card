@@ -1,0 +1,42 @@
+<div class="container-sm">
+  <h1 class='text-center my-4' ><%= "Carteira de Vacinação de #{@vaccines.first.user.first_name}" %></h1>
+
+  <% if @vaccines %>
+    <% @vaccines.each do |vaccine| %>
+      <div class="wrapper">
+        <div class="vaccine-card">
+          <div class="card-info">
+            <div class="card-title">
+              <%= vaccine.vaccine_type.name %>
+            </div>
+            <div class="card-description">
+              Doses Tomadas: <%= vaccine.dose_count %> | Última dose: <%= vaccine.last_dose_date %>
+            </div>
+          </div>
+          <div class="card-actions">
+              <%= link_to root_path, class: 'br-button' do %>
+                <i class="fas fa-edit"></i>
+                Detalhes
+              <% end %>
+              <%= link_to user_vaccine_path(vaccine), method: :delete, data: { confirm: 'Tem certeza que deseja Autenticar?' }, class: 'br-button' do %>
+                <i class="fas fa-star"></i>
+                Autenticar
+              <% end %>
+          </div>
+        </div>
+        <% vaccine.doses.order(:date).each_with_index do |dose, index| %>
+          <div class="dose-card">
+            <div class="card-title text-center">
+              <p>Dose <%= index + 1 %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
+            </div>
+            <div class="card-description text-center">
+              <%= dose.date.strftime("%d/%m/%Y") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Sem vacinas por enquanto</p>
+  <% end %>
+</div>
