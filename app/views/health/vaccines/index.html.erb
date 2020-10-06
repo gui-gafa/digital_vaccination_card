@@ -18,7 +18,7 @@
                 <i class="fas fa-edit"></i>
                 Detalhes
               <% end %>
-              <%= link_to edit_health_vaccine_path(vaccine), data: { confirm: 'Tem certeza que deseja Autenticar?' }, class: 'br-button' do %>
+              <%= link_to edit_health_vaccine_path(vaccine), class: 'br-button' do %>
                 <i class="fas fa-star"></i>
                 Autenticar
               <% end %>
@@ -27,7 +27,12 @@
         <% vaccine.doses.order(:date).each_with_index do |dose, index| %>
           <div class="dose-card">
             <div class="card-title text-center">
-              <p>Dose <%= index + 1 %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
+              <p>
+                Dose <%= index + 1 %>
+                <% if dose.user %>
+                 <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i>
+                <% end %>
+              </p>
             </div>
             <div class="card-description text-center">
               <%= dose.date.strftime("%d/%m/%Y") %>

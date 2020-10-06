@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   namespace :health do
     resources :users, only: [:index]
-    resources :vaccines, only: [:index, :edit]
+    resources :vaccines, only: [:index, :edit, :update]
   end
   devise_for :users
   root to: 'pages#home'
