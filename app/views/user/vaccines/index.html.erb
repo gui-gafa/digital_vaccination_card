@@ -14,6 +14,9 @@
     </div>
     <% end %>
   </div>
+<%# retirar %>
+
+<%# retirar %>
   <% if @vaccines %>
     <% @vaccines.each do |vaccine| %>
       <%= render partial: "shared/modal_new_dose", locals: {vaccine: vaccine}%>
@@ -68,5 +71,72 @@
     <!-- Ideia de colocar esse botão como fixado na tela -->
     <%= link_to "Nova Vacina", new_user_vaccine_path, class: 'br-button my-4', action:'' %>
   </div>
+  <%# retirar %>
+  
+  <%# retirar %>
+
+ <%# retirar adicionei inicio %>
+</div>
+
+   <%# retirar help %>
+    <% @suggested_doses = SuggestedDose.all %>
+    <% @suggested_vaccine = SuggestedDose.distinct.pluck(:vaccine_type_id) %>
+    <%# retirar help %>
+    <% @suggested_vaccine.each do |suggested_vaccine| %>
+      <div class="wrapper">
+        <div class="vaccine-card">
+          <div class="card-info">
+            <div class="card-title">
+              <%= @suggested_doses.find_by(vaccine_type_id: suggested_vaccine).vaccine_type.name %>
+            </div>
+            <div class="card-description">
+              Esquema: <%= @suggested_doses.find_by(vaccine_type_id: suggested_vaccine).description %> | Última dose tomada: <%= @vaccines.find_by(vaccine_type: @suggested_doses.find_by(vaccine_type_id: suggested_vaccine).vaccine_type).last_dose_date if @vaccines.where(vaccine_type: @suggested_doses.find_by(vaccine_type_id: suggested_vaccine).vaccine_type).present? %>
+              <%#= raise %>
+            </div>
+          </div>
+          <div class="card-actions">
+              <%#= link_to user_vaccine_path(vaccine), class: 'br-button' do %>
+                <%# <i class="fas fa-edit"></i>
+                Detalhes %>
+              <%# end %>
+              <%#= link_to user_vaccine_path(vaccine), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'br-button' do %>
+                <%# <i class="fas fa-eraser"></i> %>
+                <%# Delete %>
+              <%# end %>
+          </div>
+        </div>
+        <% @suggested_doses.each_with_index do |sdose, index| %>
+          <% if (sdose.vaccine_type_id == suggested_vaccine) %>
+            <div class="dose-card">
+              <div class="card-title text-center">
+              <%# arrumar agemonth.10 %>
+                <p>Dose <%= index + 1 %><% if sdose.month_age < 10 %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
+              </div>
+              <div class="card-description text-center">
+                <%= sdose.month_age %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <button type="button" style="border: none;" data-toggle="modal" data-target="#modal-window<%= @suggested_doses.find_by(vaccine_type_id: suggested_vaccine).id %>">
+          <div id="nova-dose" class="dose-card"
+          style="border-style: dashed; border-color: rgba(0,0,0,0.3)">
+            <div class="text-center">
+
+                <i class="far fa-plus-square" style="width:100%; text-align: center; font-size: 40px; color: rgba(0,0,0,0.4);"></i>
+
+              Nova Dose
+            </div>
+          </div>
+        </button>
+      </div>
+    <% end %>
+  <div class="text-right">
+    <!-- Ideia de colocar esse botão como fixado na tela -->
+    <%= link_to "Nova Vacina", new_user_vaccine_path, class: 'br-button my-4', action:'' %>
+  </div>
+ <%# retirar adicionei fim %>
+
+
 
 </div>
