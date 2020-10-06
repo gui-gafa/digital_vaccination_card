@@ -42,6 +42,8 @@ gem 'pg_search', '~> 2.3.0'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
+gem "select2-rails"
+gem 'jquery-rails'
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'

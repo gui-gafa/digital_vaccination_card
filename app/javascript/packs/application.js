@@ -34,3 +34,11 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   // initModal();
 });
+
+
+
+// ajax with new from user/vaccines - autocomplete form
+// TODO: Autocomplete the input with AJAX calls.
+//= require select2
+//= require jquery
+//= require jquery_ujs
