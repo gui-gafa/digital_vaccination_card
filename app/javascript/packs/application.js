@@ -28,24 +28,11 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { initModal } from '../components/init_modal';
+import { alternarCarteira } from '../components/alternar_carteiras';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   // initModal();
-});
-
-// nao tenho certeza se é aqui nesse arquivo .js
-// javascript para alternar entre os tabs
-const divcarteira = document.querySelector("#carteira");
-
-const botao = document.querySelector("#toggle-btn");
-
-botao.addEventListener('click', () => {
-  if (divcarteira.style.display === "none") {
-    divcarteira.style.display = "block";
-  } else {
-    divcarteira.style.display = "none";
-  }
-
+  alternarCarteira();
 });

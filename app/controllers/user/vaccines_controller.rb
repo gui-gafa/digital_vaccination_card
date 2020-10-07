@@ -1,6 +1,7 @@
 class User::VaccinesController < ApplicationController
   def index
     # Colocar os ifs pra dar redirect caso não seja um citzen
+    @suggested_vaccines = SuggestedVaccine.all
     if params[:query].present?
       @vaccines = Vaccine.search_global_vacinne(params[:query]).where(user: current_user)
     else

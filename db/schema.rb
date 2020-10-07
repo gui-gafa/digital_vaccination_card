@@ -44,15 +44,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_184243) do
     t.index ["suggested_vaccine_id"], name: "index_reccomended_doses_on_suggested_vaccine_id"
   end
 
-  create_table "suggested_doses", force: :cascade do |t|
-    t.integer "month_age"
-    t.text "description"
-    t.bigint "vaccine_type_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["vaccine_type_id"], name: "index_suggested_doses_on_vaccine_type_id"
-  end
-
   create_table "suggested_vaccines", force: :cascade do |t|
     t.text "description"
     t.bigint "vaccine_type_id", null: false
@@ -103,7 +94,6 @@ ActiveRecord::Schema.define(version: 2020_10_06_184243) do
   add_foreign_key "doses", "users"
   add_foreign_key "doses", "vaccines"
   add_foreign_key "reccomended_doses", "suggested_vaccines"
-  add_foreign_key "suggested_doses", "vaccine_types"
   add_foreign_key "suggested_vaccines", "vaccine_types"
   add_foreign_key "vaccines", "users"
   add_foreign_key "vaccines", "vaccine_types"
