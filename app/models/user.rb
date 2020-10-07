@@ -18,4 +18,9 @@ class User < ApplicationRecord
     using: {
       tsearch: {prefix: true}
     }
+
+  def age_in_months
+    birth_date ? ((Time.zone.today - birth_date) / 30.437).to_i : 0
+  end
+
 end
