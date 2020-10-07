@@ -5,7 +5,7 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
     <div class="form-inputs">
-      <%= f.association :vaccine_type, label: 'Vacina', collection: VaccineType.all%>
+      <%= f.association :vaccine_type,input_html:{id: "dropdown"},label: 'Vacina', collection: VaccineType.all%>
       <%= f.simple_fields_for @dose do |dose_form| %>
         <%= dose_form.input :date,
                             as: :date,
@@ -25,3 +25,11 @@
     </div>
   <% end %>
 </div>
+
+
+
+<script>
+$(document).ready(function() {
+  $('#dropdown').select2();
+});
+</script>

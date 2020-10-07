@@ -60,6 +60,9 @@
     font-weight: bold;
     font-size: 15px;
   }
+  #gambiarradoandrezao .form-check > label {
+    display:none;
+  }
 }
 .reccomended-card {
   flex: 0 0 200px !important;
