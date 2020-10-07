@@ -2,7 +2,6 @@
     <button type="button" id="toggle-btn" class="br-button ml-2">Alternar entre Carteira de Vacinação e Calendário</button>
   </div>
 <div class="container-fluid">
-  <h1 class='text-center' ><%= "Sua Carteira de Vacinação" %></h1>
 
  <%# inicio da carteira de vacinacao %>
   <div id="carteira">
@@ -152,17 +151,6 @@
             <% end %>
           </div>
         <% end %>
-        <button type="button" style="border: none; background-color: transparent;" data-toggle="modal" data-target="#modal-window<%= vaccine.id %>">
-          <div id="nova-dose" class="dose-card"
-          style="border-style: dashed; border-color: rgba(0,0,0,0.3)">
-            <div class="text-center">
-
-                <i class="far fa-plus-square" style="width:100%; text-align: center; font-size: 40px; color: rgba(0,0,0,0.4);"></i>
-
-              Nova Dose
-            </div>
-          </div>
-        </button>
       </div>
     <% end %>
   <div class="text-right">
