@@ -1,7 +1,7 @@
 <div class="container-fluid">
  <%# inicio da carteira de vacinacao %>
   <div id="carteira">
-    <h1 class='text-center my-4' ><%= "Sua Carteira de Vacinação" %></h1>
+    <h1 class='text-center my-4' ><%= "Carteira de Vacinação de #{current_user.first_name}" %></h1>
 
     <div class="search_vaccine mb-5">
       <%= form_tag user_vaccines_path, method: :get do %>
@@ -41,7 +41,12 @@
             </div>
           </div>
           <% vaccine.doses.order(:date).each_with_index do |dose, index| %>
-            <div title="<strong> Batata </strong>" class="dose-card" data-container="body" data-trigger="click" data-toggle="popover" data-placement="top" data-content="<a href=<%= root_path %> > <%= dose.health_prof_info %> </a> " >
+            <div title="" class="dose-card disabled" data-container="body" data-trigger="hover click" data-toggle="popover" data-placement="top" 
+            data-content=<% if dose.user.present? %>
+            "<strong>Autenticada por: </strong><a href=<%= root_path %> > <%= dose.health_prof_info %> </a>"        
+            <% else %>
+            "<strong>Não autenticada.</strong>"  
+            <% end %> >
               <div class="card-title text-center">
                 <p>Dose <%= index + 1 %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
               </div>

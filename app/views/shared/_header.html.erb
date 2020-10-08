@@ -18,8 +18,8 @@
                     </button>
                     <ul>
                         <li class="title">Acesso Rápido</li>
-                        <li> <%= link_to "Sua Carteira", root_path%> </li>
-                        <li><a href="https://antigo.saude.gov.br/saude-de-a-z/vacinacao/vacine-se#calendario" target=_blank>Calendário de Vacinação</a></li>
+                        <li> <%= link_to "Sua Carteira", root_path, id:"toggle-btn"%> </li>
+                        <li><a href="https://antigo.saude.gov.br/saude-de-a-z/vacinacao/vacine-se#calendario" id="toggle-btn2">Calendário de Vacinação</a></li>
                         <li><a href="https://antigo.saude.gov.br/saude-de-a-z/vacinacao/campanhas" target=_blank>Campanhas Vigentes</a></li>
                     </ul>
                 </div>
@@ -55,6 +55,7 @@
                                   <div class="image">
                                       <!-- <img src="https://picsum.photos/id/823/400" alt="Avatar" /> -->
                                       <!--  -->
+                                      <%# colocar if com as imagens aqui!!! %>
                                         <%= image_tag "https://avatars2.githubusercontent.com/u/66792796?v=4",
                                         class: "dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

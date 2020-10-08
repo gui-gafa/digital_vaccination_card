@@ -20,7 +20,7 @@
               <% end %>
               <% unless vaccine.all_doses_valid? %>
                 <%= link_to edit_health_vaccine_path(vaccine), class: 'br-button' do %>
-                  <i class="fas fa-star"></i>
+                  <i class="fas fa-check"></i>
                   Autenticar
                 <% end %>
               <% end %>
