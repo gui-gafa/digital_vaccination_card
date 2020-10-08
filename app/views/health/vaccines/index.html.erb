@@ -1,7 +1,7 @@
 <div class="container-sm">
-  <h1 class='text-center my-4' ><%= "Carteira de Vacinação de #{@vaccines.first.user.first_name}" %></h1>
+  <h1 class='text-center my-4' ><%= "Carteira de Vacinação de #{@user.first_name}" %></h1>
 
-  <% if @vaccines %>
+  <% if @vaccines.present? %>
     <% @vaccines.each do |vaccine| %>
       <div class="wrapper">
         <div class="vaccine-card">
@@ -18,9 +18,11 @@
                 <i class="fas fa-edit"></i>
                 Detalhes
               <% end %>
-              <%= link_to edit_health_vaccine_path(vaccine), class: 'br-button' do %>
-                <i class="fas fa-star"></i>
-                Autenticar
+              <% unless vaccine.all_doses_valid? %>
+                <%= link_to edit_health_vaccine_path(vaccine), class: 'br-button' do %>
+                  <i class="fas fa-star"></i>
+                  Autenticar
+                <% end %>
               <% end %>
           </div>
         </div>
@@ -42,6 +44,6 @@
       </div>
     <% end %>
   <% else %>
-    <p>Sem vacinas por enquanto</p>
+    <p class="sem-vacina">Sem vacinas por enquanto</p>
   <% end %>
 </div>

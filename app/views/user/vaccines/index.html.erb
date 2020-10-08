@@ -1,7 +1,4 @@
 <div class="container-fluid">
-  <div>
-    <button type="button" id="toggle-btn" class="br-button ml-2">Alternar entre Carteira de Vacinação e Calendário</button>
-  </div>
  <%# inicio da carteira de vacinacao %>
   <div id="carteira">
     <h1 class='text-center my-4' ><%= "Sua Carteira de Vacinação" %></h1>
@@ -19,7 +16,7 @@
       </div>
       <% end %>
     </div>
-    <% if @vaccines %>
+    <% if @vaccines.present? %>
       <% @vaccines.each do |vaccine| %>
         <%= render partial: "shared/modal_new_dose", locals: {vaccine: vaccine}%>
         <div class="wrapper">
@@ -44,7 +41,7 @@
             </div>
           </div>
           <% vaccine.doses.order(:date).each_with_index do |dose, index| %>
-            <div class="dose-card">
+            <div title="<strong> Batata </strong>" class="dose-card" data-container="body" data-trigger="click" data-toggle="popover" data-placement="top" data-content="<a href=<%= root_path %> > <%= dose.health_prof_info %> </a> " >
               <div class="card-title text-center">
                 <p>Dose <%= index + 1 %><% if dose.user %> <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i> <% end %></p>
               </div>
@@ -67,7 +64,7 @@
         </div>
       <% end %>
     <% else %>
-      <p>Sem vacinas por enquanto</p>
+      <p class="sem-vacina">Sem vacinas por enquanto</p>
     <% end %>
     <div class="text-right">
       <!-- Ideia de colocar esse botão como fixado na tela -->
@@ -79,7 +76,7 @@
 
   <%# inicio das sugestoes de doses %>
   <div id="calendario-sus" class="hide">
-   <h1 class='text-center my-4' ><%= "Suas Vacinas Recomendadas" %></h1>
+   <h1 class='text-center my-4' ><%= "Carteira da Recomendada do SUS" %></h1>
       <% @suggested_vaccines.each do |suggested_vaccine| %>
         <div class="wrapper">
           <div class="vaccine-card">
@@ -153,6 +150,7 @@
     <div class="text-right">
       <!-- Ideia de colocar esse botão como fixado na tela -->
       <%= link_to "Nova Vacina", new_user_vaccine_path, class: 'br-button my-4', action:'' %>
+      <!-- , data:{ toggle:"popover" trigger:"hover" content:"Some content"} -->
     </div>
   </div>
   <%# fim das sugestoes de doses%>
