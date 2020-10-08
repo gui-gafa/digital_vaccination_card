@@ -14,9 +14,9 @@
 
           <div class="form-inputs">
             <%= f.input :date,
-                          as: :date,
+                          as: :string,
                           label: "Data Dose",
-                          input_html: {class: "br-datepicker", style: "margin: 0 !important;"},
+                          input_html: {class: "datepicker", style: "margin: 0 !important;"},
                           order: [:day, :month, :year]
                            %>
           </div>
