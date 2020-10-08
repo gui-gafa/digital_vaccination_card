@@ -55,9 +55,16 @@
                                   <div class="image">
                                       <!-- <img src="https://picsum.photos/id/823/400" alt="Avatar" /> -->
                                       <!--  -->
-                                      <%# colocar if com as imagens aqui!!! %>
+                                      <% if current_user.first_name == "Mia" %>
+                                       <%= image_tag "a7110fab-3e67-4839-a70f-5f2c96cbc84f.jpg",
+                                        class: "dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                                      <% elsif current_user.first_name == "Lourdes" %>
+                                        <%= image_tag "https://res.cloudinary.com/wagon/image/upload/c_fill,g_face,h_200,w_200/v1599440056/rpoze0ufujtrnzysyxpe.jpg",
+                                        class: "dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                                      <% else %>
                                         <%= image_tag "https://avatars2.githubusercontent.com/u/66792796?v=4",
                                         class: "dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                                      <% end %>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
                                         </div>

@@ -10,8 +10,37 @@ Vaccine.destroy_all
 VaccineType.destroy_all
 User.destroy_all
 
+# Mia citizen cpf: 98765432100
+# Lourdes sus cpf: 69885871446
+
+User.create(
+  email: "mia@gmail.com",
+  password: '123456',
+  first_name: "Mia",
+  last_name: "Agnes",
+  cpf: "98765432100",
+  birth_date: DateTime.parse("05/08/2019 8:00"),
+  address: "SQN 214, Asa Norte, Brasília",
+  authenticated: false,
+  role: 'Cidadão'
+  )
+
+User.create(
+  email: "lourdes@sus.com",
+  password: '123456',
+  first_name: "Lourdes",
+  last_name: "Costa",
+  cpf: "69885871446",
+  birth_date: "Faker::Date.birthday(min_age: 30, max_age: 40)",
+  address: "SQN 214, Asa Norte, Brasília",
+  authenticated: true,
+  role: 'Profissional da Saúde'
+  )
+
+
+
 # guilheme citzen cpf: 33647778451
-# guilherme sus cpf: 69885871446
+
 # guilherme admin cpf: 22750758874
 
 ['lourdes', 'maique', 'marcio'].each do |name|
@@ -65,17 +94,17 @@ end
     role: 'Cidadão'
     )
 
-  User.create(
-    email: "#{name}@sus.com",
-    password: '123456',
-    first_name: name.capitalize,
-    last_name: Faker::Name.last_name,
-    cpf: '69885871446',
-    birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
-    address: Faker::Address.street_name,
-    authenticated: true,
-    role: 'Profissional da Saúde'
-    )
+  # User.create(
+  #   email: "#{name}@sus.com",
+  #   password: '123456',
+  #   first_name: name.capitalize,
+  #   last_name: Faker::Name.last_name,
+  #   cpf: '69885871446',
+  #   birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+  #   address: Faker::Address.street_name,
+  #   authenticated: true,
+  #   role: 'Profissional da Saúde'
+  #   )
 
   User.create(
     email: "#{name}@admin.com",
@@ -217,3 +246,18 @@ end
    ReccomendedDose.create(month_age: 48, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
    ReccomendedDose.create(month_age: 60, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
    ReccomendedDose.create(month_age: 72, suggested_vaccine_id: SuggestedVaccine.find_by(vaccine_type_id: VaccineType.find_by(name: 'Vacina gripe (influenza) — trivalente ou quadrivalente').id).id)
+
+
+   u = User.find_by(first_name: "Mia")
+   prof_saude = User.find_by(email: "lourdes@sus.com")
+   u.vaccines.destroy_all
+   VaccineType.all.each do |vaccinet|
+    Vaccine.create(user_comment: 'Enfermeira Lourdes foi ótima. Vacina sem dor.', user_id: u.id, vaccine_type_id: vaccinet.id )
+   end
+   ReccomendedDose.where("month_age < 15").each do |recdose|
+    Dose.create(date: rand(1.months).seconds.ago - (recdose.month_age - 1).months, 
+    user: prof_saude, 
+    vaccine: Vaccine.find_by(user: u, vaccine_type: recdose.suggested_vaccine.vaccine_type))
+   end
+   a = Dose.all.pluck(:vaccine_id)
+   Vaccine.where.not(id: a).destroy_all
