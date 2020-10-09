@@ -1,0 +1,100 @@
+<div class="container-fluid">
+
+  <%# inicio das sugestoes de doses %>
+  <div id="calendario-sus">
+   <h1 class='text-center my-4' ><%= "Carteira da Recomendada do SUS" %></h1>
+    <div class="search_vaccine mb-5">
+      <%= form_tag user_suggested_vaccines_path, method: :get do %>
+        <div class="d-flex" style="width: 80%; margin:0 auto;">
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            style: "width: 80%",
+            placeholder: "Procure por uma vacina em sua carteira"
+          %>
+          <%= submit_tag "Pesquisar", class: "br-button ml-2", primary:"" %>
+        </div>
+      <% end %>
+    </div>
+    <% if @suggested_vaccines.present? %>
+      <% @suggested_vaccines.each do |suggested_vaccine| %>
+        <div class="wrapper">
+          <div class="vaccine-card">
+            <div class="card-info">
+              <div class="card-title">
+                <%= suggested_vaccine.vaccine_type.name %>
+              </div>
+              <div class="card-description">
+                Esquema: <%= suggested_vaccine.description %> | Última dose tomada: <%= @vaccines.find_by(vaccine_type: suggested_vaccine.vaccine_type).last_dose_date if @vaccines.find_by(vaccine_type: suggested_vaccine.vaccine_type).present? %>
+              </div>
+            </div>
+            <div class="card-actions">
+                <%#= link_to user_vaccine_path(vaccine), class: 'br-button' do %>
+                  <%# <i class="fas fa-edit"></i>
+                  Detalhes %>
+                <%# end %>
+                <%#= link_to user_vaccine_path(vaccine), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'br-button' do %>
+                  <%# <i class="fas fa-eraser"></i> %>
+                  <%# Delete %>
+                <%# end %>
+            </div>
+          </div>
+          <% suggested_vaccine.reccomended_doses.each_with_index do |sdose, index| %>
+            <div class="dose-card reccomended-card">
+              <% if  (@vaccines.where(vaccine_type: suggested_vaccine.vaccine_type).present?) &&
+              (@vaccines.where(vaccine_type: suggested_vaccine.vaccine_type)[0].doses.count > index) %>
+                <div class="card-title text-center">
+                  <p>Dose <%= index + 1 %>
+                  <i class="fas fa-check-circle" style="color: #45f266; display:inline-block;"></i>
+                  </p>
+                </div>
+                <div class="card-description text-center">
+                  Idade Recomendada
+                  <br>
+                  <%= sdose.month_age %> meses
+                  <div style="color: #45f266">
+                    Dose Em Dia
+                  </div>
+                </div>
+              <% elsif current_user.age_in_months > sdose.month_age %>
+                <div class="card-title text-center">
+                  <p>Dose <%= index + 1 %>
+                  <i class="fas fa-times-circle" style="color: red; display:inline-block;"></i>
+                  </p>
+                </div>
+                <div class="card-description text-center">
+                  Idade Recomendada
+                  <br>
+                  <%= sdose.month_age %> meses
+                  <div style="color: red">
+                    <strong>Dose Em Atraso</strong>
+                  </div>
+                </div>
+              <% else %>
+                <div class="card-title text-center">
+                  <p>Dose <%= index + 1 %></p>
+                </div>
+                <div class="card-description text-center">
+                  Idade Recomendada
+                  <br>
+                  <%= sdose.month_age %> meses
+                  <div style="color: orange">
+                    Dose Futura em <%= sdose.month_age - current_user.age_in_months %> meses
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="sem-vacina">Vacina não encontrada.</p>
+    <% end %>
+    <div class="text-right">
+      <!-- Ideia de colocar esse botão como fixado na tela -->
+      <%= link_to "Nova Vacina", new_user_vaccine_path, class: 'br-button my-4', action:'' %>
+      <!-- , data:{ toggle:"popover" trigger:"hover" content:"Some content"} -->
+    </div>
+  </div>
+  <%# fim das sugestoes de doses%>
+</div>

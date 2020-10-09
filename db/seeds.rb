@@ -9,6 +9,7 @@ Dose.destroy_all
 Vaccine.destroy_all
 VaccineType.destroy_all
 User.destroy_all
+SuggestedVaccine.destroy_all
 
 # Mia citizen cpf: 98765432100
 # Lourdes sus cpf: 69885871446
@@ -255,9 +256,17 @@ end
     Vaccine.create(user_comment: 'Enfermeira Lourdes foi ótima. Vacina sem dor.', user_id: u.id, vaccine_type_id: vaccinet.id )
    end
    ReccomendedDose.where("month_age < 15").each do |recdose|
-    Dose.create(date: rand(1.months).seconds.ago - (recdose.month_age - 1).months, 
-    user: prof_saude, 
+    rectemp = recdose.month_age
+    if rectemp <= 0
+      rectemp = 12
+    end
+    Dose.create(date: rand(1.months).seconds.ago - (rectemp - 1).months,
+    user: prof_saude,
     vaccine: Vaccine.find_by(user: u, vaccine_type: recdose.suggested_vaccine.vaccine_type))
    end
    a = Dose.all.pluck(:vaccine_id)
    Vaccine.where.not(id: a).destroy_all
+
+vacina = u.vaccines.find_by(vaccine_type: VaccineType.find_by(name: 'Vacina tríplice viral (sarampo, caxumba e rubéola) – SCR'))
+
+vacina.destroy

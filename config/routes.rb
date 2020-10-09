@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :doses, only: [:new, :create]
     end
     resources :vaccine_types, only:[:show]
+    resources :suggested_vaccines, only: [:index]
   end
   namespace :health do
     resources :users, only: [:index]
