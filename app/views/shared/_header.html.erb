@@ -16,12 +16,14 @@
                     <button class="br-button" type="button" circle mini>
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
-                    <ul>
-                        <li class="title">Acesso Rápido</li>
-                        <li> <%= link_to "Sua Carteira", root_path, id:"toggle-btn"%> </li>
-                        <li><a href="https://antigo.saude.gov.br/saude-de-a-z/vacinacao/vacine-se#calendario" id="toggle-btn2">Calendário de Vacinação</a></li>
-                        <li><a href="https://antigo.saude.gov.br/saude-de-a-z/vacinacao/campanhas" target=_blank>Campanhas Vigentes</a></li>
-                    </ul>
+                    <% if current_user && current_user.role == "Cidadão" %>
+                      <ul>
+                          <!-- <li class="title">Acesso Rápido</li> -->
+                          <li> <%= link_to "Sua Carteira", user_vaccines_path, id:"toggle-btn"%> </li>
+                          <li> <%= link_to "Calendário de Vacinação", user_suggested_vaccines_path, id:"toggle-btn2"%></li>
+                          <li><a href="https://antigo.saude.gov.br/saude-de-a-z/vacinacao/campanhas" target=_blank>Campanhas Vigentes</a></li>
+                      </ul>
+                    <% end %>
                 </div>
 
                 <div class="search-btn">

@@ -3,7 +3,7 @@ class User::VaccinesController < ApplicationController
     # Colocar os ifs pra dar redirect caso não seja um citzen
     @suggested_vaccines = SuggestedVaccine.all
     if params[:query].present?
-      @vaccines = Vaccine.search_global_vacinne(params[:query]).where(user: current_user)
+      @vaccines = Vaccine.search_global_vaccine(params[:query]).where(user: current_user)
     else
       @vaccines = Vaccine.where(user: current_user).joins(:vaccine_type).order('vaccine_types.name')
     end
@@ -44,7 +44,7 @@ class User::VaccinesController < ApplicationController
   def destroy
     @vaccine = Vaccine.find(params[:id])
     # Caso não use o pundit
-    if @vaccine.user != current_user 
+    if @vaccine.user != current_user
       # || @vaccine.valid_doses?
       redirect_to user_vaccines_path, alert: 'Não autorizado.'
       return

@@ -9,7 +9,7 @@ class Vaccine < ApplicationRecord
   validates :vaccine_type, uniqueness: { scope: :user}
 
   include PgSearch::Model
-  pg_search_scope :search_global_vacinne,
+  pg_search_scope :search_global_vaccine,
   against: [:user_comment],
   associated_against: {
     vaccine_type: [:name, :prevents, :composition, :indication]

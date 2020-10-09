@@ -34,9 +34,9 @@ import { alternarCarteira } from '../components/alternar_carteiras';
 
 document.addEventListener('turbolinks:load', () => {
   initFlatpickr();
+  initPopover();
   // Call your functions here, e.g:
   // initSelect2();
   // initModal();
-  initPopover();
-  alternarCarteira();
+  // alternarCarteira();
 });
